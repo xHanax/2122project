@@ -1,10 +1,10 @@
 <?php
 session_start();
+
 if(!isset($_SESSION['username'])){
   echo "<script>location.replace('login.php');</script>";
 } else {
   $username = $_SESSION['username'];
- // $phone = $_SESSION['phone'];
 }
 
 include 'config.php'
@@ -25,13 +25,13 @@ include 'config.php'
   <link rel="stylesheet" href="./assets/_variables.scss">
   <link rel="stylesheet" href="./assets/_bootswatch.scss">
 
-  <!-- <link rel="stylesheet" href="./assets/style.css"> -->
+  <!-- Font Awesome --> 
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 
-  <!-- Font Awesome -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-
-  <!-- Tempusdominus Bootstrap 4 -->
+  <!-- Bootstrap Datepicker --> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+  
+  <!-- Datatable -->
   <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
@@ -39,22 +39,29 @@ include 'config.php'
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  
+  <!-- Datatable -->
   <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+  
   <!-- Popper -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  
   <!-- Bootstrap Datepicker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
+  
   <!-- Bootstrap pagination -->
   <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-  <!--  -->
+  
+  <!-- Templates -->
   <link rel="stylesheet" href="./assets/bootstrap.bundle.min.js">
   <link rel="stylesheet" href="./assets/prism.js">
   <link rel="stylesheet" href="./assets/custom.js">
 
 
-  <!-- font -->
+  <!-- Custom -->
   <style>
+    /*  Font  */
     @font-face {
       font-family: 'NanumBarunGothic';
       font-style: normal;
@@ -68,6 +75,8 @@ include 'config.php'
       background: linear-gradient(to bottom, #A0B8C5 146px, #EEF2F3 546px);
     }
 
+
+    /* Datatable */
     /* 표시 건수수 설정 */
     div.dataTables_length {
       text-align : left !important;
@@ -79,11 +88,10 @@ include 'config.php'
       text-align : right !important;
       font-size: 12px;
     }
-
-    div.dataTables_filter input {
-      width: 140px !important;
+    div.dataTables_filter input { 
+      width: 140px !important; 
     }
-
+    
     /* 데이터 정보 */
     div.dataTables_info {
       text-align : left !important;
@@ -97,14 +105,15 @@ include 'config.php'
       padding-top: 5px;
     }
 
+    /* 테이블 수평 중앙 정렬 */
     table.dataTable td {
       vertical-align: middle;
     }
 
+    /* 테이블 행 높이 조절 */
     .table td {
       padding: 10px;
     }
-
   </style>
 
 </head>
