@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'config.php';
 
 ## Read value
@@ -14,10 +14,10 @@ $searchValue = mysqli_real_escape_string($con,$_POST['search']['value']); // Sea
 $searchByFromdate = mysqli_real_escape_string($con,$_POST['searchByFromdate']);
 $searchByTodate = mysqli_real_escape_string($con,$_POST['searchByTodate']);
 
-## Search 
+## Search
 $searchQuery = "";
 if($searchValue != ''){
-    $searchQuery = " and (Date like '%".$searchValue."%' or person_name like '%".$searchValue."%' or phone_num like'%".$searchValue."%' or state like '%".$searchValue."%' ) ";
+    $searchQuery = " and (Date like '%".$searchValue."%' or person_name like '%".$searchValue."%' or phone_num like'%".$searchValue."%' or sex like '%".$searchValue."%' ) ";
 }
 
 ## Date filter
@@ -36,22 +36,23 @@ $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$empQuery = "select * from electronic_list WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
-$empRecords = mysqli_query($con, $empQuery);
+$tbQuery = "select * from electronic_list WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+$tbRecords = mysqli_query($con, $tbQuery);
 $data = array();
 
-while ($row = mysqli_fetch_assoc($empRecords)) {
+
+while ($row = mysqli_fetch_assoc($tbRecords)) {
   $data[] = array(
-    "No"=>$row['No'],
-    "Date"=>$row['Date'],
-    "Time"=>$row['Time'],
-    "person_name"=>$row['person_name'],
-    "phone_num"=>$row['phone_num'],
-    "addr"=>$row['addr'],
-    "sex"=>$row['sex'],
-    "temperature"=>$row['temperature'],
-    "accuracy"=>$row['accuracy'],
-    "img"=>'<img src="data:image/jpeg;base64,'.base64_encode($row['img']).'" />',
+    "No" => $row['No'],
+    "Date" => $row['Date'],
+    "Time" => $row['Time'],
+    "person_name" => $row['person_name'],
+    "phone_num" => $row['phone_num'],
+    "addr" => $row['addr'],
+    "sex" => $row['sex'],
+    "temperature" => $row['temperature'],
+    "accuracy" => $row['accuracy'],
+    "img" => '<img src="data:image/jpeg;base64,'.base64_encode($row['img']).'" />',
   );
 }
 
@@ -65,24 +66,5 @@ $response = array(
 
 echo json_encode($response);
 die;
-
-
-
-/* 페이징 (검색X)
-$resultset = mysqli_query($con, "select * FROM electronic_list;") or die("database error:". mysqli_error($con));
-$data = array();
-while( $rows = mysqli_fetch_assoc($resultset) ) {
-	$data[] = $rows;
-}
-
-$results = array(
-	"echo" => 1,
-  "totalRecords" => count($data),
-  "totalDisplayRecords" => count($data),
-  "aaData"=>$data);
-echo json_encode($results);
-exit;
-*/
-
 
 ?>

@@ -8,13 +8,14 @@
 
 </head>
 <body>
-  <?php 
+  <?php
   session_start();
   session_destroy();
-  ?>
-  <script>
-    alert("====== 로그아웃 ======");
-    location.replace('index.php');
-  </script>
+
+  //$username = $_SESSION['username'];
+
+  echo "<script> location.replace('index.php'); </script>";
+
+?>
 </body>
 </html>

@@ -1,14 +1,13 @@
-<?php 
+<?php
 session_start();
 if(!isset($_SESSION['username'])){
   echo "<script>location.replace('login.php');</script>";
 } else {
   $username = $_SESSION['username'];
-  $phone = $_SESSION['phone'];
-  $gender = $_SESSION['gender'];
+ // $phone = $_SESSION['phone'];
 }
 
-include 'config.php' 
+include 'config.php'
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,10 +27,10 @@ include 'config.php'
 
   <!-- <link rel="stylesheet" href="./assets/style.css"> -->
 
-  <!-- Font Awesome --> 
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 
-  <!-- Tempusdominus Bootstrap 4 --> 
+  <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
   <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -45,7 +44,7 @@ include 'config.php'
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <!-- Bootstrap Datepicker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
   <!-- Bootstrap pagination -->
   <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
   <!--  -->
@@ -68,7 +67,7 @@ include 'config.php'
       font-family: 'NanumBarunGothic';
       background: linear-gradient(to bottom, #A0B8C5 146px, #EEF2F3 546px);
     }
-    
+
     /* 표시 건수수 설정 */
     div.dataTables_length {
       text-align : left !important;
@@ -81,10 +80,10 @@ include 'config.php'
       font-size: 12px;
     }
 
-    div.dataTables_filter input { 
-      width: 140px !important; 
+    div.dataTables_filter input {
+      width: 140px !important;
     }
-    
+
     /* 데이터 정보 */
     div.dataTables_info {
       text-align : left !important;
@@ -98,6 +97,14 @@ include 'config.php'
       padding-top: 5px;
     }
 
+    table.dataTable td {
+      vertical-align: middle;
+    }
+
+    .table td {
+      padding: 10px;
+    }
+
   </style>
 
 </head>
@@ -105,7 +112,7 @@ include 'config.php'
 <!-- header -->
 <header class="container">
   <div class="row d-flex justify-content-end">
-    <div class="col-3 col-sm-2 d-inline"  style="padding: 0;">
+    <div class="col-3 col-sm-2"  style="padding: 0;">
       <p class="" style="font-size:13px; line-height: 50px; text-align: right; margin:0"><?php echo "관리자 : $username"; ?></p>
     </div>
     <div class="col-3 col-sm-1" style="font-size: 12px; line-height: 50px; height:50px;">
@@ -150,21 +157,21 @@ include 'config.php'
           </div>
 
           <!-- search button -->
-          <div class="col col-lg-2 d-grid p-0" style="background: green; height: 50px; margin-right: 5px; box-sizing: border-box;">
+          <div class="col col-lg-2 d-grid p-0" style="height: 50px; margin-right: 5px; box-sizing: border-box;">
             <button type="button" id="search" class="btn btn-primary btn-block">Search</button>
           </div>
-          
+
           <!-- search button(all) -->
           <div class="col col-lg-1 d-grid p-0" style="height: 50px; margin-right: 0">
             <button type="button" class="btn btn-primary btn-block" onClick="window.location.reload()">All</button>
-          </div>            
+          </div>
         </div>
 
         <!-- table start -->
         <div class="bs-component">
           <table class="table table-hover table-light display dataTable text-center" id="dbtable" style="font-size: 0.8em;">
             <thead>
-              <tr style="text-align: center">
+              <tr>
                 <th>No</th>
                 <th>Date</th>
                 <th>Time</th>
@@ -173,8 +180,8 @@ include 'config.php'
                 <th>Addr</th>
                 <th>Gender</th>
                 <th>Temp</th>
-		<th>Accuracy</th>
-		<th>Image</th>
+                <th>Accuracy</th>
+                <th>Image</th>
               </tr>
             </thead>
           </table>
@@ -213,7 +220,7 @@ include 'config.php'
       </div>
     </div>
     <!-- time series graph end -->
-  </div>
+    </div>
 </div>
 <!-- footer -->
 <div style="background: #888; height: 80px; text-align: right; margin-top: 50px;">
@@ -229,10 +236,8 @@ include 'config.php'
     //Datepicker
     $("#picker1").datepicker({
       format: "yyyy-mm-dd",
-      // container:'#picker1',
       autoclose: true,
       endDate: today,
-      calendarWeeks: false,
       clearBtn: true,
       showWeekDays: true,
       todayHighlight: true,
@@ -248,10 +253,8 @@ include 'config.php'
 
     $("#picker2").datepicker({
       format: "yyyy-mm-dd",
-      // container:'#picker2',
       autoclose: true,
       endDate: today,
-      calendarWeeks: false,
       clearBtn: true,
       showWeekDays: true,
       todayHighlight: true,
@@ -267,7 +270,7 @@ include 'config.php'
 
     // jQuery(document).ready(function () {
     var dataTable = $('#dbtable').DataTable({
-      'processing': true,
+      //'processing': true,
       'serverSide': true,
       'serverMethod': 'post',
       'responsive': true,
@@ -292,7 +295,7 @@ include 'config.php'
       // "paginate":true,
       // "paginationType":"full_numbers",
       // "displayLength": 10,
-      // "lengthChange":false,	
+      // "lengthChange":false,
       // "filter": false,
       language: {
         emptyTable: "데이터가 없습니다.",
@@ -318,8 +321,8 @@ include 'config.php'
         { data: 'addr'},
         { data: 'sex'},
         { data: 'temperature'},
-	{ data: 'accuracy'},
-	{ data: 'img'}
+        { data: 'accuracy'},
+        { data: 'img'}
       ],
       'dom': "<'row'<'col-5'l><'col-7'f>>" + "<'row'<'col-12'i>t<'col-12'p>>",
     });
@@ -332,4 +335,4 @@ include 'config.php'
 
 </script>
 </body>
-</html>
+</html>                        
